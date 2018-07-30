@@ -1,5 +1,6 @@
 package com.cashequitydb.cashequitydb.implementation;
 
+import com.cashequitydb.cashequitydb.model.OrderInfo;
 import com.cashequitydb.cashequitydb.model.UserInformation;
 import com.cashequitydb.cashequitydb.repository.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,33 @@ public class UserValidImplementation implements UserInterface {
             return "success";
         else
             return "invalid user";
+    }
+
+    //sudhanshu
+    @Override
+    public List<UserInformation> SecurityFetch() {
+        String sql="select COMPANY_NAME,SECTOR,SYMBOL,ISIN from security_master";
+        List <UserInformation> security_list =jdbcTemplate.query(sql,new BeanPropertyRowMapper(UserInformation.class));
+        return security_list;
+    }
+
+    @Override
+    public List<OrderInfo> FetchUnexecutedOrder(String clientCode) {
+        String sql="select sm.company_name,neo.isin,direction,quantity,limit_price,order_id from not_executed_order neo " +
+                "left join security_master sm on neo.isin = sm.isin  where client_code=?";
+
+        List <OrderInfo> unexecuted_order =jdbcTemplate.query(sql,new Object[]{clientCode},new BeanPropertyRowMapper(OrderInfo.class));
+        //System.out.println(unexecuted_order);
+        return unexecuted_order;
+    }
+
+    @Override
+    public List<OrderInfo> FetchAllOrder(String clientCode) {
+        String sql="select sm.company_name,o.isin,direction,quantity,limit_price,order_id from `order` o " +
+                "left join security_master sm on o.isin = sm.isin  where client_code=?";
+
+        List <OrderInfo> executed_order =jdbcTemplate.query(sql,new Object[]{clientCode},new BeanPropertyRowMapper(OrderInfo.class));
+        //System.out.println(executed_order);
+        return executed_order;
     }
 }
