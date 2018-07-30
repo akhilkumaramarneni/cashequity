@@ -23,8 +23,8 @@ public class MyController {
 
     @Autowired
     //UserValidImplementation objectvalidation;
-
-            UserValidImplementation userValidImplementation;
+    UserValidImplementation userValidImplementation;
+    
     @Autowired
     OrderMatchingImplementation ordermatchingimplementation;
     //sudhanshu
