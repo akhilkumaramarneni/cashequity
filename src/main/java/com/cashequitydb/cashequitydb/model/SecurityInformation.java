@@ -4,6 +4,22 @@ public class SecurityInformation {
 
     String company_name,sector,symbol,isin;
 
+//    public String getMarket_lot() {
+//        return market_lot;
+//    }
+//
+//    public void setMarket_lot(String market_lot) {
+//        this.market_lot = market_lot;
+//    }
+//
+//    public String getPrice_variance_limit() {
+//        return price_variance_limit;
+//    }
+//
+//    public void setPrice_variance_limit(String price_variance_limit) {
+//        this.price_variance_limit = price_variance_limit;
+//    }
+
     public String getCompany_name() {
         return company_name;
     }

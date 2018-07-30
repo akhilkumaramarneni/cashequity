@@ -1,24 +1,25 @@
 package com.cashequitydb.cashequitydb.implementation;
 
-import com.cashequitydb.cashequitydb.model.OrderModel;
+import com.cashequitydb.cashequitydb.model.UnExecOrder;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class SortImplementation {
+//Deepak
+public class SortImpl {
 
-    public List<OrderModel> buysort(List<OrderModel> listbuyorder){
+    public List<UnExecOrder> buysort(List<UnExecOrder> listbuyorder){
 
         //logic to sort with high buy cost and high quantity
 
-        Collections.sort(listbuyorder, new Comparator<OrderModel>() {
+        Collections.sort(listbuyorder, new Comparator<UnExecOrder>() {
             @Override
-            public int compare(OrderModel o1, OrderModel o2) {
-                if(o1.getLimit_price()<o2.getLimit_price()){
+            public int compare(UnExecOrder o1, UnExecOrder o2) {
+                if(o1.getPrice()<o2.getPrice()){
                     return 1;
                 }
-                else if(o1.getLimit_price()==o2.getLimit_price()){
+                else if(o1.getPrice()==o2.getPrice()){
                     if(o1.getQuantity()<o2.getQuantity()){
                         return 1;
                     }
@@ -36,17 +37,17 @@ public class SortImplementation {
 
 
 
-    public List<OrderModel> sellsort(List<OrderModel> listsellorder){
+    public List<UnExecOrder> sellsort(List<UnExecOrder> listsellorder){
 
         //code sell sort with low cost and more quantity
 
-        Collections.sort(listsellorder, new Comparator<OrderModel>() {
+        Collections.sort(listsellorder, new Comparator<UnExecOrder>() {
             @Override
-            public int compare(OrderModel o1, OrderModel o2) {
-                if(o1.getLimit_price()<o2.getLimit_price()){
+            public int compare(UnExecOrder o1, UnExecOrder o2) {
+                if(o1.getPrice()<o2.getPrice()){
                     return -1;
                 }
-                else if(o1.getLimit_price()==o2.getLimit_price()){
+                else if(o1.getPrice()==o2.getPrice()){
                     if(o1.getQuantity()<o2.getQuantity()){
                         return 1;
                     }
@@ -60,9 +61,4 @@ public class SortImplementation {
         });
         return listsellorder;
     }
-
-    //Deepak
-
-    
-
 }

@@ -2,11 +2,11 @@ package com.cashequitydb.cashequitydb.controller;
 
 import com.cashequitydb.cashequitydb.implementation.OrderMatchingImplementation;
 import com.cashequitydb.cashequitydb.implementation.UserValidImplementation;
-import com.cashequitydb.cashequitydb.model.OrderInfo;
-import com.cashequitydb.cashequitydb.model.OrderModel;
-import com.cashequitydb.cashequitydb.model.SecurityInformation;
-import com.cashequitydb.cashequitydb.model.UserInformation;
+import com.cashequitydb.cashequitydb.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -102,5 +102,40 @@ public class MyController {
 
     }
 
+
+    //deepak
+    @RequestMapping(value="/getSecurityValue/{isin}",method = RequestMethod.POST,produces = "application/json")
+    public ResponseEntity< List <SecurityValue> > getSecValue(@PathVariable String isin)
+    {
+        List<SecurityValue> list=userValidImplementation.getsecvalue(isin);
+        HttpHeaders httpHeaders=new HttpHeaders();
+        if(list==null)
+        {
+            return new ResponseEntity< List <SecurityValue> >(HttpStatus.NOT_FOUND);
+        }
+
+        httpHeaders.add("No of records found",String.valueOf(list.size()));
+        return new ResponseEntity< List <SecurityValue> > (list,httpHeaders,HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/gettoporder/{security_isin}",method = RequestMethod.POST,produces = "application/json")
+    public ResponseEntity< List < List <UnExecOrder> > >getunexecorder(@PathVariable String security_isin)
+    {
+        //System.out.println("*********************deepak1**************");
+        //System.out.println(security_isin);
+        List< List<UnExecOrder> > list=userValidImplementation.getunexecorder(security_isin);
+        HttpHeaders header=new HttpHeaders();
+        if(list==null)
+        {
+            return new ResponseEntity<List<List <UnExecOrder>> >(HttpStatus.NOT_FOUND);
+
+        }
+
+        header.add("no of list item",String.valueOf(list.size()));
+        return new ResponseEntity<List<List <UnExecOrder> > >(list,header,HttpStatus.OK);
+
+//        return list;
+    }
 
 }
