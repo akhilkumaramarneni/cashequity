@@ -2,7 +2,7 @@ package com.cashequitydb.cashequitydb.model;
 
 public class OrderModel {
 
-    String client_code,isin,trade_time,direction,id,      trade_type,trade_date;
+    String client_code,isin,trade_time,direction,id, trade_type,trade_date;
     int quantity;
     double limit_price;
 

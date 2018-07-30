@@ -4,6 +4,7 @@ import com.cashequitydb.cashequitydb.implementation.OrderMatchingImplementation;
 import com.cashequitydb.cashequitydb.implementation.UserValidImplementation;
 import com.cashequitydb.cashequitydb.model.OrderInfo;
 import com.cashequitydb.cashequitydb.model.OrderModel;
+import com.cashequitydb.cashequitydb.model.SecurityInformation;
 import com.cashequitydb.cashequitydb.model.UserInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class MyController {
     //sudhanshu
     Integer len, order_no;
     OrderInfo order, unexe_order;
+    //....
 
     @RequestMapping(value = "/validateuser")
     public String Validate(@RequestBody UserInformation userinfo) {
@@ -44,9 +46,9 @@ public class MyController {
     }
 
     @RequestMapping(value = "/getsecurity")
-    public List<UserInformation> fetchsecuritydata() {
+    public List<SecurityInformation> fetchsecuritydata() {
 
-        List<UserInformation> security = userValidImplementation.SecurityFetch();
+        List<SecurityInformation> security = userValidImplementation.SecurityFetch();
 
         return security;
 

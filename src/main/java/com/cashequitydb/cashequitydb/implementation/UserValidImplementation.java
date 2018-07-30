@@ -1,6 +1,7 @@
 package com.cashequitydb.cashequitydb.implementation;
 
 import com.cashequitydb.cashequitydb.model.OrderInfo;
+import com.cashequitydb.cashequitydb.model.SecurityInformation;
 import com.cashequitydb.cashequitydb.model.UserInformation;
 import com.cashequitydb.cashequitydb.repository.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,9 @@ public class UserValidImplementation implements UserInterface {
 
     //sudhanshu
     @Override
-    public List<UserInformation> SecurityFetch() {
+    public List<SecurityInformation> SecurityFetch() {
         String sql="select COMPANY_NAME,SECTOR,SYMBOL,ISIN from security_master";
-        List <UserInformation> security_list =jdbcTemplate.query(sql,new BeanPropertyRowMapper(UserInformation.class));
+        List <SecurityInformation> security_list =jdbcTemplate.query(sql,new BeanPropertyRowMapper(SecurityInformation.class));
         return security_list;
     }
 
